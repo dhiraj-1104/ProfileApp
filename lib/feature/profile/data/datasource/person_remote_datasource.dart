@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:profile_app_assignment/feature/profile/data/model/person_model.dart';
 import 'package:profile_app_assignment/feature/profile/domain/entities/person.dart';
@@ -5,7 +7,7 @@ import 'package:profile_app_assignment/feature/profile/domain/entities/person.da
 // RemoteDataSource interface
 abstract class PersonRemoteDatasource{
   // Fetches the Profile detail from the api
-  Future<PersonModel> fetchProfile();
+  Future<List<PersonModel>> fetchProfile();
 }
 
 class PersonRemoteDatasourceImpl implements PersonRemoteDatasource{
@@ -18,9 +20,19 @@ class PersonRemoteDatasourceImpl implements PersonRemoteDatasource{
 
   // These function fetches the api
   @override
-  Future<PersonModel> fetchProfile() async{
-    final response = await dio.get(baseUrl);
-    return PersonModel.fromJson(response.data);
+  Future<List<PersonModel>> fetchProfile() async{
+    try{
+      final response = await dio.get(baseUrl);
+      print(response.data);
+      final List<dynamic> result = response.data['results'];
+      print("The result is");
+      print(result);
+      return result.map((json) => PersonModel.fromJson(json)).toList();
+    }catch(e){
+      print(e.toString());
+      return [];
+    }
+
 
   }
 }

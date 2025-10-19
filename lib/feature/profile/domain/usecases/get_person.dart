@@ -1,13 +1,13 @@
 import 'package:profile_app_assignment/feature/profile/domain/entities/person.dart';
 import 'package:profile_app_assignment/feature/profile/domain/repositories/person_repository.dart';
 
-// UseCase for retrieving use Profile
+// UseCase for retrieving Person
 class GetPerson{
-  final PersonRepository profileRepository;
+  final PersonRepository personRepository;
 
-  GetPerson(this.profileRepository);
+  GetPerson(this.personRepository);
 
-  Future<Person> call() async{
-    return await profileRepository.getPerson();
+  Future<List<Person>> call() async{
+    return await personRepository.getPerson();
   }
 }

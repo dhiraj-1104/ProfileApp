@@ -34,11 +34,8 @@ class PersonModel {
 
   // Function to Convert model into entity
   Person toEntity() {
-    return Person(
-      imgUrl,
-      firstName,
-      age,
-      '$state, $country',
+    return Person(imgUrl: imgUrl, name: firstName, age: age, ste: state, country: country
+
     );
   }
 }

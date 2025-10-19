@@ -6,8 +6,16 @@ class Person {
   final String name;
   // Age of the Person
   final int age;
-  // Location of the Person(State , Country)
-  final String location;
+  //State
+  final String ste;
+  // Country
+  final String country;
+  //Like
+  bool isLiked;
 
-  Person(this.imgUrl, this.name, this.age, this.location);
+  Person({required this.imgUrl,required this.name,required this.age,required this.ste,required this.country,this.isLiked = false});
+  @override
+  String toString() {
+    return 'Person(name: $name, age: $age,  image : $imgUrl)';
+  }
 }
