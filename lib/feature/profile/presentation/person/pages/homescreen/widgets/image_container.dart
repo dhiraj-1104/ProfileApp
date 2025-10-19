@@ -21,6 +21,7 @@ class _ImageContainerState extends State<ImageContainer> with SingleTickerProvid
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
+  // local isLiked vairaible to manage toggle
   bool isLiked = false;
 
   @override
@@ -44,7 +45,7 @@ class _ImageContainerState extends State<ImageContainer> with SingleTickerProvid
     _controller.dispose();
     super.dispose();
   }
-
+// toggle like
   void _onIconTap() {
     setState(() {
       isLiked = !isLiked;
@@ -61,6 +62,7 @@ class _ImageContainerState extends State<ImageContainer> with SingleTickerProvid
       onTap: widget.onPress,
       child: Hero(
         tag: widget.name,
+        // Image
         child: Container(
          margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
           decoration: BoxDecoration(
@@ -76,12 +78,14 @@ class _ImageContainerState extends State<ImageContainer> with SingleTickerProvid
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    // Name
                     Text(widget.name,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),),
+                    // Like Icon
                     Padding(
                       padding: const EdgeInsets.only(right: 10.0),
                       child: BlocBuilder<PersonCubit,PersonState>(builder: (context, state) {
@@ -102,6 +106,7 @@ class _ImageContainerState extends State<ImageContainer> with SingleTickerProvid
 
                   ],
                 ),
+                // State
                 Text(widget.state,
                 style: TextStyle(
                   fontSize: 10,

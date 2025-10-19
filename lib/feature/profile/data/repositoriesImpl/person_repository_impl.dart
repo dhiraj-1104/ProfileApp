@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:profile_app_assignment/feature/profile/data/datasource/person_remote_datasource.dart';
 import 'package:profile_app_assignment/feature/profile/domain/entities/person.dart';
 import 'package:profile_app_assignment/feature/profile/domain/repositories/person_repository.dart';
@@ -15,8 +13,6 @@ class PersonRepositoryImpl implements PersonRepository{
   Future<List<Person>> getPerson() async{
     final models = await personRemoteDatasource.fetchProfile();
     // Return the response in the form of Entity which is required by the Ui of the App
-    print("The model is");
-    print(models.map((model) => model.toEntity()).toList());
     return models.map((model) => model.toEntity()).toList();
   }
 

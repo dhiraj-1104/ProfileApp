@@ -5,7 +5,6 @@ import 'package:profile_app_assignment/feature/profile/presentation/person/pages
 import 'package:profile_app_assignment/injection_container.dart' as di;
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

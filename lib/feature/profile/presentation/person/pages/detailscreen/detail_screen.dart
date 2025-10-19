@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profile_app_assignment/feature/profile/presentation/person/cubit/person_cubit.dart';
 import 'package:profile_app_assignment/feature/profile/presentation/person/cubit/person_state.dart';
-import 'package:profile_app_assignment/feature/profile/presentation/person/pages/detailscreen/widgets/top_curve_clipper.dart';
+import 'package:profile_app_assignment/feature/profile/presentation/person/pages/detailscreen/widgets/custom_notch.dart';
 
 import '../../../../domain/entities/person.dart';
 
+// DetailScreen
 class DetailScreen extends StatefulWidget {
   final Person person;
   final ValueChanged<bool>? onLikeChanged;
@@ -28,11 +29,13 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
 
     isLiked = widget.person.isLiked;
 
+    // animation controller
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
 
+    // scaleing controller
     _scaleAnimation = Tween<double>(begin: 1.0, end: 1.4)
         .chain(CurveTween(curve: Curves.easeOut))
         .animate(_controller);
@@ -44,15 +47,14 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
     super.dispose();
   }
 
+  // toggle likes on click
   void _onIconTap() {
     setState(() {
       isLiked = !isLiked;
-      print(isLiked);
     });
 
     // Play the pop animation
     _controller.forward().then((_) => _controller.reverse());
-    print(isLiked);
     widget.onLikeChanged?.call(isLiked);
 
   }
@@ -64,6 +66,7 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
         tag: widget.person.name,
         child: Stack(
           children: [
+            // Image
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.sizeOf(context).height,
@@ -71,6 +74,7 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
                   image: DecorationImage(image: NetworkImage(widget.person.imgUrl,),fit: BoxFit.cover)
               ),
             ),
+            // Top bar Icon
             Padding(
               padding: const EdgeInsets.only(top: 20.0,right: 15,left: 15),
               child: Row(
@@ -82,6 +86,7 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
               ),
             ),
 
+            //Bottom Info Part
             Align(
               alignment: Alignment.bottomCenter,
               child: ClipPath(
@@ -93,6 +98,7 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
                   color: Colors.white,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20.0,left: 20,right: 20),
+                    // Info of the person
                     child: Column(
                       children: [
                         Row(
@@ -111,6 +117,7 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
                                 Text("${widget.person.ste}, ${widget.person.country}",style: TextStyle(fontSize: 12),)
                               ],
                             ),
+                            // Like Icon
                             BlocBuilder<PersonCubit,PersonState>(builder: (context, state) {
                               if(state is PersonLoaded){
                                 final updatedPerson = state.persons.firstWhere((element) => element.name == widget.person.name,);
@@ -130,6 +137,7 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
                 ),
               ),
             ),
+            // Straight weight line
             Positioned(
               bottom: MediaQuery.sizeOf(context).height * 0.19,
               right: MediaQuery.sizeOf(context).width * 0.40,

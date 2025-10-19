@@ -14,8 +14,4 @@ class Person {
   bool isLiked;
 
   Person({required this.imgUrl,required this.name,required this.age,required this.ste,required this.country,this.isLiked = false});
-  @override
-  String toString() {
-    return 'Person(name: $name, age: $age,  image : $imgUrl)';
-  }
 }

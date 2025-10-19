@@ -11,7 +11,6 @@ class PersonCubit extends Cubit<PersonState>{
   Future<void> fetchPerson() async{
     emit(PersonLoading());
     try{
-      print("These is running");
       final List persons = await getPerson();
       print(persons);
       emit(PersonLoaded(persons));

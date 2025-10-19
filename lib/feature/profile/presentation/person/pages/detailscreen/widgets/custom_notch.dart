@@ -27,17 +27,10 @@ class CustomNotch extends CustomClipper<Path> {
     final handleStartX = center - halfHandleWidth;
     final handleEndX = center + halfHandleWidth;
 
-    // --- Start Drawing ---
 
     // 1. Move to the top-left start point (after implied flat top before curve)
     path.moveTo(0, sideSlopeHeight + handleHeight); // Start low enough for the slope
 
-    // 2. Draw the bottom-left rounded corner (bottom corners are usually rounded in such designs)
-    // For this specific image, it seems the rounded corners are only on the top-left and top-right *outer* edge.
-    // Let's re-evaluate based on the image: the image shows rounded top-left and top-right of the **entire shape**.
-
-    // Let's assume the rounded corners are on the main body of the container, at the top.
-    // The handle is a cutout.
 
     // Start drawing from the point after the top-left outer rounded corner
     path.moveTo(0, actualCornerRadius);
